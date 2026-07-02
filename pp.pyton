@@ -1,1 +1,38 @@
+from pptx import Presentation
+from pptx.util import Inches, Pt
+
+prs=Presentation()
+titles=["Das bin ich","Das bin ich","Meine Zukunft"]
+for i,t in enumerate(titles):
+    if i>0: prs.slides.add_slide(prs.slide_layouts[5])
+    else: prs.slides.add_slide(prs.slide_layouts[5])
+for i,slide in enumerate(prs.slides):
+    tb=slide.shapes.add_textbox(Inches(0.5),Inches(0.3),Inches(8),Inches(0.5))
+    p=tb.text_frame.paragraphs[0];p.text=titles[i];p.font.size=Pt(28)
+s=prs.slides[0]
+body=s.shapes.add_textbox(Inches(0.7),Inches(1),Inches(8),Inches(4)).text_frame
+body.text="Miro Kaminski\n\nFoto 1. Sek: Bitte einfügen\nFoto 3. Sek: Bitte einfügen"
+s=prs.slides[1]
+tf=s.shapes.add_textbox(Inches(0.7),Inches(1),Inches(8),Inches(4)).text_frame
+for txt in ["Hallo! Ich heisse Miro Kaminski und besuche die 3. Sek.",
+"Hobbys: Sport, Musik hören, Zeit mit Freunden verbringen",
+"Interessen: Informatik, Technik, Computer",
+"Familie: Ich wohne mit meiner Familie zusammen.",
+"Ich bin freundlich, hilfsbereit und lerne gerne Neues."]:
+    p=tf.add_paragraph() if tf.text else tf.paragraphs[0]
+    p.text=txt
+s=prs.slides[2]
+tf=s.shapes.add_textbox(Inches(0.7),Inches(1),Inches(8),Inches(4)).text_frame
+items=[
+"Lehrstelle: Informatiker Applikationsentwicklung EFZ",
+"Wunschberuf: Informatiker Applikationsentwicklung EFZ",
+"Weiterbildung: Berufsmaturität (BM)",
+"Ziele: Lehre erfolgreich abschliessen, Berufserfahrung sammeln und mich weiterentwickeln."
+]
+tf.text=items[0]
+for it in items[1:]:
+    tf.add_paragraph().text=it
+path="/mnt/data/PowerPoint_Das_bin_ich_Miro_Kaminski.pptx"
+prs.save(path)
+print(path)
 
